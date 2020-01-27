@@ -4,7 +4,7 @@ from rest_framework import generics
 from .serializers import BlogPostSerializer
 from postings.models import BlogPost
 
-class BlogPostRudView(generics.RetrieveUpdateDestroyAPIView):
+class BlogPostRudView(generics.RetrieveUpdateAPIView):
     lookup_field = 'pk'
     serializer_class = BlogPostSerializer
     # queryset = BlogPost.objects.all()
