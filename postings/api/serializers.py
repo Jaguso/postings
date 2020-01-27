@@ -22,5 +22,5 @@ class BlogPostSerializer(serializers.ModelSerializer):
         if self.instance:
             qs = qs.exclude(pk=self.instance.pk)
         if qs.exists():
-            raise serializers.ValidationError("The title must be unique")
+            raise serializers.ValidationError("This title has already been used")
         return value
