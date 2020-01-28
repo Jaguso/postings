@@ -1,10 +1,10 @@
 # generic views
-from rest_framework import generics
+from rest_framework import generics, mixins
 
 from .serializers import BlogPostSerializer
 from postings.models import BlogPost
 
-class BlogPostAPIView(generics.ListAPIView):
+class BlogPostAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     lookup_field = 'pk'
     serializer_class = BlogPostSerializer
     # queryset = BlogPost.objects.all()
@@ -16,7 +16,8 @@ class BlogPostAPIView(generics.ListAPIView):
         serializer.save(user=self.request.user)
 
     def post(self, request, *args, **kwargs):
-        return
+        return self.create(request, *args, **kwargs)
+    
 
 
 class BlogPostRudView(generics.RetrieveUpdateAPIView):
